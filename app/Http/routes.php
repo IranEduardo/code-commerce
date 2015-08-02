@@ -17,7 +17,15 @@ Route::get('/', function () {
 
 Route::pattern('id', '[0-9]+');
 
-Route::group(['prefix' => 'admin'],function() {
+Route::get('products', ['as' => 'products',
+    'uses' => 'ProductsController@index'
+]);
+Route::get('products/create', ['as' => 'products.create',
+    'uses' => 'ProductsController@create'
+]);
+
+
+/*Route::group(['prefix' => 'admin'],function() {
 
     Route::group(['prefix' => 'categories'], function () {
 
@@ -82,3 +90,4 @@ Route::group(['prefix' => 'admin'],function() {
     });
 });
 
+*/
