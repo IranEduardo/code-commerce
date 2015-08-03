@@ -25,4 +25,18 @@ class ProductsController extends Controller
     {
         return view('products.create');
     }
+    public function store(Request $request)
+    {
+       $input = $request->all();
+       $product = $this->productModel->fill($input);
+       $product->save();
+       return redirect('products');
+    }
+    public function edit($id)
+    {
+      $product = $this->productModel->find($id);
+      return view('products.edit',compact('product'));
+
+    }
+
 }

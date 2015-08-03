@@ -23,6 +23,12 @@ Route::get('products', ['as' => 'products',
 Route::get('products/create', ['as' => 'products.create',
     'uses' => 'ProductsController@create'
 ]);
+Route::post('products/store', ['as' => 'products.store',
+    'uses' => 'ProductsController@store'
+]);
+Route::get('products/{id}/edit', ['as' => 'products.edit',
+    'uses' => 'ProductsController@edit'
+]);
 
 
 /*Route::group(['prefix' => 'admin'],function() {
