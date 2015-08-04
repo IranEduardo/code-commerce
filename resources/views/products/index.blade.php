@@ -3,6 +3,10 @@
 @section('content')
     <div class="container">
         <h1>Products</h1>
+        <br>
+        <a href="{{route('products.create') }}" class="btn btn-default">New Product</a>
+        <br>
+        <br>
         <table class="table">
             <tr>
                 <th>ID</th>
@@ -21,7 +25,9 @@
                 <td>{{$product->price}}</td>
                 <td>{{$product->featured}}</td>
                 <td>{{$product->recommend}}</td>
-                <td></td>
+                <td><a href= "{{ route('products.edit',['id' => $product->id]) }}"> Edit </a> |
+                    <a href= "{{ route('products.destroy',['id' => $product->id]) }}"> Delete </a>
+                </td>
             </tr>
             @endforeach
 

@@ -3,7 +3,15 @@
 @section('content')
     <div class="container">
         <h1>Editing Product: {{$product->name}}</h1>
-        {!! Form::open() !!}
+
+        @if($errors->any())
+            <ul class="alert">
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        @endif
+        {!! Form::open(['route' => ['products.update', $product->id], 'method' => 'put']) !!}
            <div class="form-group">
                 {!! Form::label('name', 'Name:') !!}
                 <br>

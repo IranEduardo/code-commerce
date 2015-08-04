@@ -25,7 +25,7 @@ class ProductsController extends Controller
     {
         return view('products.create');
     }
-    public function store(Request $request)
+    public function store(Requests\ProductRequest $request)
     {
        $input = $request->all();
        $product = $this->productModel->fill($input);
@@ -37,6 +37,16 @@ class ProductsController extends Controller
       $product = $this->productModel->find($id);
       return view('products.edit',compact('product'));
 
+    }
+    public function update(Requests\ProductRequest $request, $id)
+    {
+       $this->productModel->find($id)->update($request->all());
+       return redirect('products');
+    }
+    public function destroy($id)
+    {
+        $this->productModel->find($id)->delete();
+        return redirect('products');
     }
 
 }
