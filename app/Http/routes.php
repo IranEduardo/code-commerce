@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/', function() {
+    return view('app');
+});
+
 Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
 
       Route::group(['prefix' => 'products'], function() {
@@ -33,6 +37,16 @@ Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
               route::put('{id}/update', ['as' => 'products.update',
                   'uses' => 'ProductsController@update'
               ]);
+
+             Route::group(['prefix' => 'images'], function() {
+
+                 Route::get('{id}/product', ['as' => 'products.images', 'uses' => 'ProductsController@images']);
+                 Route::get('create/{id}/product', ['as' => 'products.images.create', 'uses' => 'ProductsController@createImage']);
+                 Route::post('store/{id}/product', ['as' => 'products.images.store', 'uses' => 'ProductsController@storeImage']);
+                 Route::get('destroy/{id}/image', ['as' => 'products.images.destroy', 'uses' => 'ProductsController@destroyImage']);
+             });
+
+
       });
 });
 
