@@ -32,23 +32,36 @@ class ProductsController extends Controller
     }
     public function store(Requests\ProductRequest $request)
     {
-       $input = $request->all();
-       $product = $this->productModel->fill($input);
-       $product->save();
+        $input = $request->all();
+        $product = $this->productModel->fill($input);
+        $product->tags()->sync(explode(',',$input['tags']));
+        $product->save();
+
         return redirect(route('products'));
     }
     public function edit($id, Category $category)
     {
        $categories = $category->lists('name','id');
        $product = $this->productModel->find($id);
-       return view('products.edit',compact('product','categories'));
+
+       foreach ($product->tags as $tag)
+         $arraytags[] = $tag->id;
+
+       $tags_name = '';
+       if (isset($arraytags))
+         $tags_name = implode(',', $arraytags);
+
+       return view('products.edit',compact('product','categories','tags_name'));
 
     }
     public function update(Requests\ProductRequest $request, $id)
     {
-       $this->productModel->find($id)->update($request->all());
+        $product = $this->productModel->find($id);
+        $input = $request->all();
+        $product->tags()->sync(explode(',',$input['tags']));
+        $product->update($input);
 
-       return redirect(route('products'));
+        return redirect(route('products'));
     }
     public function destroy($id)
     {

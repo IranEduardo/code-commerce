@@ -44,6 +44,11 @@
                 {!! Form::select('recommend',array('No','Yes'),$product->recommend) !!}
            </div>
            <div class="form-group">
+                {!! Form::label('tags', 'Tags:') !!}
+                <br>
+                {!! Form::textarea('tags', $tags_name ,['class' => 'form-control]']) !!}
+           </div>
+           <div class="form-group">
                 {!! Form::submit('Save Product',['class' => 'btn btn-primary']) !!}
            </div>
         {!! Form::close() !!}
