@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
-
 $factory->define(CodeCommerce\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
@@ -35,5 +24,11 @@ $factory->define(CodeCommerce\Product::class, function (Faker\Generator $faker) 
         'featured' => $faker->boolean,
         'recommend' => $faker->boolean,
         'category_id' => $faker->numberBetween(1,15)
+    ];
+});
+
+$factory->define(CodeCommerce\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word
     ];
 });
