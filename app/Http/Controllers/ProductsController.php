@@ -34,7 +34,6 @@ class ProductsController extends Controller
     {
         $input = $request->all();
         $product = $this->productModel->fill($input);
-        $product->tags()->sync(explode(',',$input['tags']));
         $product->save();
 
         return redirect(route('products'));
@@ -43,13 +42,7 @@ class ProductsController extends Controller
     {
        $categories = $category->lists('name','id');
        $product = $this->productModel->find($id);
-
-       foreach ($product->tags as $tag)
-         $arraytags[] = $tag->id;
-
-       $tags_name = '';
-       if (isset($arraytags))
-         $tags_name = implode(',', $arraytags);
+       $tags_name = $product->listTags();
 
        return view('products.edit',compact('product','categories','tags_name'));
 
@@ -58,7 +51,9 @@ class ProductsController extends Controller
     {
         $product = $this->productModel->find($id);
         $input = $request->all();
-        $product->tags()->sync(explode(',',$input['tags']));
+
+        $product->saveTags($input['tags']);
+
         $product->update($input);
 
         return redirect(route('products'));
