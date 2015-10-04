@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function() {
+/*Route::get('/', function() {
     return view('app');
-});
+}); */
+
+Route::get('/','StoreController@index');
+
+Route::get('store/category/{id}/products',['as' =>'store.showCategoryProducts', 'uses' => 'StoreController@showCategoryProducts'] );
 
 Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
 

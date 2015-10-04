@@ -54,4 +54,14 @@ class Product extends Model
        $tags = $this->tags->lists('name')->toArray();
        return implode(',',$tags);
    }
+
+   public function scopeFeatured($query)
+   {
+       return $query->where('featured','=','1');
+   }
+
+    public function scopeRecommended($query)
+    {
+       return $query->where('recommend','=','1');
+    }
 }
