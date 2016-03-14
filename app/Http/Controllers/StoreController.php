@@ -16,7 +16,7 @@ class StoreController extends Controller
       $pFeatured = Product::featured()->get();
       $pRecommended = Product::recommended()->get();
       $categories = Category::all();
-      return view('store.index',compact('categories','pFeatured','pRecommended'));
+      return view('store.showProducts',compact('categories','pFeatured','pRecommended'));
 
     }
 
@@ -25,7 +25,7 @@ class StoreController extends Controller
        $category = Category::find($id);
        $category_products = $category->products;
        $categories = Category::all();
-       return view('store.index',compact('category_products','category','categories'));
+       return view('store.showCategoryProducts',compact('category_products','category','categories'));
 
 
     }
