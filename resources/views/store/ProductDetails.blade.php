@@ -38,8 +38,21 @@
                              <i class="fa fa-shopping-cart"></i>
                                Adicionar no Carrinho
                           </a>
-                     </span>
-             </div>
+                </span>
+
+                <div class="product-tags">
+                   <h4>Tags:</h4>
+                     @foreach($product->tags->chunk(3) as $chunktag)
+                        <div class="row">
+                            @foreach($chunktag as $tag)
+                              <div class="col-sm-3">
+                                  <a href="{{route('store.TagProducts',['id' => $tag->id])}}">{{$tag->name}}</a>
+                              </div>
+                            @endforeach
+                       </div>
+                     @endforeach
+                </div>
+            </div>
             <!--/product-information-->
       </div>
   </div>
