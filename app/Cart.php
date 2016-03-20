@@ -14,7 +14,11 @@ class Cart
         $this->items = [];
     }
 
-    public function add($id, $name, $price)
+
+    /**
+       * @param array $image [id => 1 , extension => 'jpg']
+     */
+    public function add($id, $name, $price, array $image)
     {
        if (isset($this->items[$id])) {
            $this->items[$id]['qtd'] += 1;
@@ -23,7 +27,8 @@ class Cart
                 $this->items[$id] = [
                    'name' => $name,
                    'price' => $price,
-                   'qtd' => 1
+                   'qtd' => 1,
+                   'image' => $image
                ];
        }
 
@@ -39,6 +44,22 @@ class Cart
        return $this->items;
     }
 
+    public function changeProductQtd($id, $operation)
+    {
+        if (isset($this->items[$id]['qtd'])) {
+            if ($operation == 'add') {
+                $this->items[$id]['qtd'] += 1;
+            }
+            if ($operation == 'sub') {
+                $this->items[$id]['qtd'] -= 1;
+                if ($this->items[$id]['qtd'] <= 0) {
+                    $this->remove($id);
+                }
+            }
+        }
+
+    }
+
     public function getTotal()
     {
         $total = 0;
@@ -46,6 +67,9 @@ class Cart
         {
            $total += $item['qtd'] * $item['price'];
         }
+
+        return $total;
     }
+
 
 }

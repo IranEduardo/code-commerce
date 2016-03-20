@@ -27,6 +27,11 @@ Route::get('cart',['as' => 'cart', 'uses' => 'CartController@index']);
 
 Route::get('cart/product/{id}/add',['as' => 'cart.add', 'uses' => 'CartController@add']);
 
+Route::get('cart/product/{id}/destroy',['as' => 'cart.destroy', 'uses' => 'CartController@destroy']);
+
+Route::get('cart/product/{id}/qtd/{operation}',['as' => 'cart.changeProductQtd', 'uses' => 'CartController@changeCartProductQtd']);
+
+
 
 Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
 
