@@ -49,10 +49,6 @@ class StoreController extends Controller
 
         return view('store.TagProducts', compact('tag','tag_products','categories'));
 
-
-
-
-
     }
 
 }

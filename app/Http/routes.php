@@ -23,6 +23,10 @@ Route::get('store/product/{id}/details',['as' =>'store.productDetails', 'uses' =
 
 Route::get('store/tag/{id}/products',['as' =>'store.TagProducts', 'uses' => 'StoreController@TagProducts'] );
 
+Route::get('cart',['as' => 'cart', 'uses' => 'CartController@index']);
+
+Route::get('cart/product/{id}/add',['as' => 'cart.add', 'uses' => 'CartController@add']);
+
 
 Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
 
