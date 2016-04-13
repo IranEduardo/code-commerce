@@ -17,6 +17,8 @@
 
 Route::get('/','StoreController@index');
 
+Route::get('/home','StoreController@index');
+
 Route::get('store/category/{id}/products',['as' =>'store.CategoryProducts', 'uses' => 'StoreController@CategoryProducts'] );
 
 Route::get('store/product/{id}/details',['as' =>'store.productDetails', 'uses' => 'StoreController@ProductDetails'] );
@@ -31,9 +33,11 @@ Route::get('cart/product/{id}/destroy',['as' => 'cart.destroy', 'uses' => 'CartC
 
 Route::get('cart/product/{id}/qtd/{operation}',['as' => 'cart.changeProductQtd', 'uses' => 'CartController@changeCartProductQtd']);
 
+Route::get('checkout/placeOrder',['middleware' => 'auth', 'as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
 
 
-Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','verifyuseradmin'], 'where' =>['id' => '[0-9]+']], function(){
 
       Route::group(['prefix' => 'products'], function() {
 
@@ -68,7 +72,7 @@ Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function(){
       });
 });
 
-Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth','verifyuseradmin'], 'where' =>['id' => '[0-9]+']], function() {
 
       Route::group(['prefix' => 'categories'], function () {
 
@@ -92,6 +96,12 @@ Route::group(['prefix' => 'admin', 'where' =>['id' => '[0-9]+']], function() {
             ]);
       });
  });
+
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+
+]);
 
 
 /*Route::group(['prefix' => 'admin'],function() {

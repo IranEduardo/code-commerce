@@ -4,8 +4,8 @@ $factory->define(CodeCommerce\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'password' => bcrypt('123456'),
+        'remember_token' => bcrypt('123456'),
     ];
 });
 
