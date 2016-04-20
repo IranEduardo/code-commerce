@@ -31,11 +31,13 @@ class CheckoutController extends Controller
 
             }
 
-            return "Pedido Gerado com Sucesso";
+            $cart->clear();
+
+            return redirect()->route('account.orders');
 
          }
 
-        return "Nenhum Pedido Gerado";
+        return redirect()->route('cart');
     }
     //
 }

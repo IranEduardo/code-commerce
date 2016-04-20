@@ -35,6 +35,7 @@ Route::get('cart/product/{id}/qtd/{operation}',['as' => 'cart.changeProductQtd',
 
 Route::get('checkout/placeOrder',['middleware' => 'auth', 'as' => 'checkout.place', 'uses' => 'CheckoutController@place']);
 
+Route::get('account/orders', ['middleware' => 'auth', 'as' => 'account.orders', 'uses' => 'AccountController@orders']);
 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','verifyuseradmin'], 'where' =>['id' => '[0-9]+']], function(){

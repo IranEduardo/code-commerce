@@ -12,13 +12,36 @@ class Order extends Model
         'status'
     ];
 
+    private $status_list = [
+        'Pendente',
+        'Processando',
+        'Em Espera',
+        'Completo',
+        'Fechado',
+        'Cancelado'
+    ];
+
+    /**
+     * @return array
+     */
+    public function getStatus()
+    {
+        return $this->status_list[$this->status];
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
     public function items()
     {
         return $this->hasMany('CodeCommerce\OrderItem');
     }
     public function user()
     {
-        return $this->hasOne('CodeCommerce\User');
+        return $this->belongsTo('CodeCommerce\User');
     }
 
 }
