@@ -8,6 +8,7 @@ use CodeCommerce\Http\Requests;
 use CodeCommerce\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use CodeCommerce\Category;
+use CodeCommerce\Order;
 
 class AccountController extends Controller
 {
@@ -17,9 +18,32 @@ class AccountController extends Controller
     {
        $orders = Auth::user()->orders;
 
+       $client = Auth::user()->name;
+
        $categories = Category::all();
 
-       return view('store.orders',compact('orders','categories'));
+       return view('store.orders',compact('orders','categories','client'));
+
+    }
+
+    public function changeOrderStatus(Request $request)
+    {
+
+        $order = Order::find($request['orderId']);
+
+        $order->status = $request['state'];
+        $order->save();
+
+        return redirect()->route('account.manageOrders');
+
+
+    }
+
+    public function manageOrders()
+    {
+        $orders = Order::all();
+
+        return view('account.manage_orders',compact('orders'));
 
     }
 

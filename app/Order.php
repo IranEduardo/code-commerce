@@ -21,6 +21,8 @@ class Order extends Model
         'Cancelado'
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     /**
      * @return array
      */
@@ -44,4 +46,8 @@ class Order extends Model
         return $this->belongsTo('CodeCommerce\User');
     }
 
+    public function getStatusList()
+    {
+        return $this->status_list;
+    }
 }

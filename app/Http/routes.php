@@ -40,6 +40,10 @@ Route::get('account/orders', ['middleware' => 'auth', 'as' => 'account.orders', 
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth','verifyuseradmin'], 'where' =>['id' => '[0-9]+']], function(){
 
+    Route::post('account/order/changeStatus', ['as' => 'account.changeOrderStatus', 'uses' => 'AccountController@changeOrderStatus']);
+
+    Route::get('account/manageOrders', ['as' => 'account.manageOrders', 'uses' => 'AccountController@manageOrders']);
+
       Route::group(['prefix' => 'products'], function() {
 
               route::get('', ['as' => 'products',

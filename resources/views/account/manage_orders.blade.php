@@ -1,12 +1,10 @@
-@extends('store.index');
+@extends('store.store');
 
 @section('content')
 
-    <div class="col-sm-9 padding-right">
-       <h4>Meus Pedidos ------</h4>
-       <p align="center">
-           Cliente: <strong>{{$client}}</strong>
-        </p>
+    <div class="container">
+       <h4>Todos os Pedidos --------</h4>
+
        @if ($orders)
           <table class="table table-sm ">
               <thead>
@@ -16,6 +14,9 @@
                     </th>
                     <th>
                         Data
+                    </th>
+                    <th>
+                        Cliente
                     </th>
                     <th>
                         Total
@@ -38,10 +39,16 @@
                             {{$order->created_at->format('d/m/Y' )}}
                         </td>
                         <td>
+                            {{$order->user->name}}
+                        </td>
+                        <td>
                             R$ {{number_format($order->total,2,",",".")}}
                         </td>
                         <td>
-                            {{$order->getStatus()}}
+                            {!! Form::open(['route' => ['account.changeOrderStatus'],'method' => 'post','id' => 'FormOrder_'.$order->id  ]) !!}
+                                {!! Form::hidden('orderId', $order->id) !!}
+                                {!! Form::select('state',$order->getStatusList(), $order->status, ['onchange' => "document.getElementById(" .'"FormOrder_'  . $order->id . '"' . ").submit();" ]) !!}
+                            {!! Form::close() !!}
                         </td>
                         <td>
                             <a data-toggle="collapse" data-target=".OrderId_{{$order->id }}" href="#" aria-expanded="false"">
