@@ -1,4 +1,4 @@
-@extends('store.store');
+@extends('app');
 
 @section('content')
 
@@ -6,7 +6,7 @@
        <h4>Todos os Pedidos --------</h4>
 
        @if ($orders)
-          <table class="table table-sm ">
+          <table class="table">
               <thead>
                  <tr>
                     <th>
@@ -74,6 +74,8 @@
        @else
            <p>Nao Existe Pedidos</p>
        @endif
+
+       {!! $orders->render() !!}
 
     </div>
 

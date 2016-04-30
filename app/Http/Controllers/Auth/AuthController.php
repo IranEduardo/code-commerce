@@ -45,6 +45,17 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'cep'      => 'max:8',
+            'cpf'      => 'required|size:11',
+            'endereco' => 'required',
+            'complemento' => 'max:50',
+            'numero_endereco' => 'integer',
+            'bairro'          => 'required|max:30',
+            'uf'              => 'required|size:2',
+            'cidade'          => 'required|max:40',
+            'pais'            => 'required|max:30',
+            'data_nascimento'  => 'required|date_format:d/m/Y'
+
         ]);
     }
 
@@ -60,6 +71,16 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'cep'      => $data['cep'],
+            'cpf'      => $data['cpf'],
+            'endereco' => $data['endereco'],
+            'complemento' => $data['complemento'],
+            'numero_endereco' => $data['numero_endereco'],
+            'bairro'          => $data['bairro'],
+            'uf'              => $data['uf'],
+            'cidade'          => $data['cidade'],
+            'pais'            => $data['pais'],
+            'data_nascimento' => date('Y-m-d',strtotime($data['data_nascimento']))
         ]);
     }
 }

@@ -41,7 +41,7 @@ class AccountController extends Controller
 
     public function manageOrders()
     {
-        $orders = Order::all();
+        $orders = Order::paginate(10);
 
         return view('account.manage_orders',compact('orders'));
 
