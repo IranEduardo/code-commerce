@@ -2,3 +2,7 @@
 /node_modules
 Homestead.yaml
 .env
+/config/pagseguro.php
+yes
+yes.pub
+.idea/workspace.xml
